@@ -31,6 +31,13 @@ local function open_window()
   })
 end
 
+local function update_view()
+  vim.api.nvim_buf_set_option(buf, 'modifiable', true)
+  local result = vim.fn.systemlist('ls -al')
+  vim.api.nvim_buf_set_lines(buf, 3, -1, false, result)
+  vim.api.nvim_buf_set_option(buf, 'modifiable', false)
+end
+
 local function whid()
   open_window()
   print("hello from whid")
@@ -38,4 +45,5 @@ end
 
 return {
   whid = whid,
+  ls = update_view,
 }
