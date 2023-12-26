@@ -1,6 +1,12 @@
 -- lua/whid.lua
 local buf, win
 
+local buf_initial_content = {
+  'first line',
+  'second line',
+  '    third line',
+}
+
 local function open_window()
   buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
@@ -26,9 +32,7 @@ local function open_window()
     col = col,
   }
   win = vim.api.nvim_open_win(buf, true, opts)
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, {
-    'hello'
-  })
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, buf_initial_content)
 end
 
 local function update_view()
